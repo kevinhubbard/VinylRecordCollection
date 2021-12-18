@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 public class Main {
 	public static void main(String[] args) {
@@ -26,8 +27,17 @@ public class Main {
 		System.out.println("Your collection has " + collection.size() + " albums.");
 
 		for (Album album : collection) {
+			try {
+				FileOutputStream fileStream = new FileOutputStream("albums.txt");
+				ObjectOutputStream os = new ObjectOutputStream(fileStream);
+				os.writeObject(album);
+				os.close();
+			} catch(Exception ex) {
+				ex.printStackTrace();
+			}
 			System.out.println(album.albumName + " by " + album.albumArtist);
 		}
+		
 
 	}
 }

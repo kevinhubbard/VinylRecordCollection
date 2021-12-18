@@ -1,4 +1,6 @@
-public class Record extends Album {
+import java.io.Serializable;
+
+public class Record extends Album implements Serializable {
 
 	public Record(String n, String a) {
 		albumName = n;
