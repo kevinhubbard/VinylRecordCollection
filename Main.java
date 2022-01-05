@@ -1,13 +1,9 @@
-import java.util.*;
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-import java.io.*;
 
 public class Main {
 
-	public void start() {
-		
+	public Main() {
 		JFrame frame = new JFrame("Music Collection");
 		PanelTop pt = new PanelTop();
 		PanelMain pm = new PanelMain();
@@ -22,10 +18,7 @@ public class Main {
 		frame.setVisible(true);
 	}
 
-
 	public static void main(String[] args) {
-		Main m = new Main();
-		m.start();
+		new Main();
 	}
-
 }

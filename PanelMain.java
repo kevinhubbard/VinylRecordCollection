@@ -9,6 +9,7 @@ public class PanelMain extends JPanel {
 	JTextField artField, albField, lenField;
 
 	public PanelMain() {
+		getAlbumCollection();
 		JLabel artLabel = new JLabel("Artist:");
 		artField = new JTextField(20);
 		JLabel albLabel = new JLabel("Album:");
@@ -30,39 +31,53 @@ public class PanelMain extends JPanel {
 
 		add(save);
 		add(load);
-		add(update);
-		add(clear);
+		//add(update);
+		//add(clear);
 
-		clear.addActionListener(new ClearListener());
+		//clear.addActionListener(new ClearListener());
 		save.addActionListener(new SaveListener());
 		load.addActionListener(new LoadListener());
-		update.addActionListener(new UpdateListener());
+		//update.addActionListener(new UpdateListener());
 	}
 
-	public void getAlbumCollection(){
+	private void getAlbumCollection() {
 		try {
 			ObjectInputStream is = new ObjectInputStream(new FileInputStream("collection.ser"));
-			Object object = is.readObject();
+			collection = (ArrayList) is.readObject();
 
-			while(object != null){
-				collection.add((Record) object);
-			}
-		} catch (Exception es) {
-			es.printStackTrace();
+			System.out.println("Your collection has " + collection.size() + " albums.");
+			is.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("that file was not found.");
+			
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+			return;
+		} catch (ClassNotFoundException c) {
+			System.out.println("Class not found");
+			c.printStackTrace();
+			return;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return;
+		}
+
+		for (Record rec : collection) {
+			System.out.println(rec.getAlbumInfo());
 		}
 	}
 
-	public void saveAlbumCollection() {
+	private void saveAlbumCollection() {
 		try {
 			ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("collection.ser"));
 			os.writeObject(collection);
+			System.out.println("collection is " + collection.size() + " albums big.");
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		System.out.println("collection saved successfully.");
 	}
 
-	public void clearScreen() {
+	private void clearScreen() {
 		artField.setText("");
 		albField.setText("");
 		lenField.setText("");
@@ -71,27 +86,30 @@ public class PanelMain extends JPanel {
 
 	//INNER CLASSES
 
-	public class ClearListener implements ActionListener {
-		public void actionPerformed(ActionEvent ev) {
-			clearScreen();
-		}
-	}
-
 	public class SaveListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
 			Record rec = new Record(albField.getText(), artField.getText(), lenField.getText());
-			collection.add(rec);	
+			collection.add(rec);
+			saveAlbumCollection();
 			clearScreen();
 		}
 	}
 
 	public class LoadListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
-			if(collection.isEmpty()) {
+/*			if(collection.isEmpty()) {
 				System.out.println("Collection is empty.");
 			} else {
 				System.out.println(collection.size());
-			}
+			}*/
+
+			getAlbumCollection();
+		}
+	}
+
+/*	public class ClearListener implements ActionListener {
+		public void actionPerformed(ActionEvent ev) {
+			clearScreen();
 		}
 	}
 
@@ -99,5 +117,5 @@ public class PanelMain extends JPanel {
 		public void actionPerformed(ActionEvent ev) {
 			saveAlbumCollection();
 		}
-	}
+	}*/
 }
