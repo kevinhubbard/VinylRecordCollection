@@ -7,6 +7,7 @@ import java.io.*;
 public class PanelMain extends JPanel {
 	ArrayList<Record> collection = new ArrayList<Record>();
 	JTextField artField, albField, lenField;
+	File file = new File("collection.ser");
 
 	public PanelMain() {
 		getAlbumCollection();
@@ -42,14 +43,14 @@ public class PanelMain extends JPanel {
 
 	private void getAlbumCollection() {
 		try {
-			ObjectInputStream is = new ObjectInputStream(new FileInputStream("collection.ser"));
+			ObjectInputStream is = new ObjectInputStream(new FileInputStream(file));
 			collection = (ArrayList) is.readObject();
 
 			System.out.println("Your collection has " + collection.size() + " albums.");
 			is.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("that file was not found.");
-			
+			System.out.println("File does not exist.");
+			//add file here if you can.
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 			return;
@@ -69,9 +70,9 @@ public class PanelMain extends JPanel {
 
 	private void saveAlbumCollection() {
 		try {
-			ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("collection.ser"));
+			ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(file));
 			os.writeObject(collection);
-			System.out.println("collection is " + collection.size() + " albums big.");
+			System.out.println("Collection is " + collection.size() + " albums big.");
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
@@ -97,12 +98,6 @@ public class PanelMain extends JPanel {
 
 	public class LoadListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
-/*			if(collection.isEmpty()) {
-				System.out.println("Collection is empty.");
-			} else {
-				System.out.println(collection.size());
-			}*/
-
 			getAlbumCollection();
 		}
 	}
