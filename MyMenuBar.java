@@ -18,6 +18,7 @@ public class MyMenuBar extends JMenuBar {
 		exit = new JMenuItem("Exit");
 		exit.addActionListener(new ExitListener());
 		help = new JMenuItem("Help");
+		help.addActionListener(new HelpListener());
 
 		file.add(save);
 		file.add(exit);
@@ -28,7 +29,13 @@ public class MyMenuBar extends JMenuBar {
 
 	public class ExitListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
-			System.out.println("ahh shit.");
+			System.exit(0);
+		}
+	}
+
+	public class HelpListener implements ActionListener {
+		public void actionPerformed(ActionEvent ev) {
+			System.out.println("help here");
 		}
 	}
 }

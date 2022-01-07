@@ -1,10 +1,15 @@
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.*;
 
 public class Main {
-JFrame frame = new JFrame("Music Collection");
+
+	public static void main(String[] args) {
+		new Main();
+	}
+
 	public Main() {
-		
+		JFrame frame = new JFrame("Music Collection");
 		PanelTop pTop = new PanelTop();
 		PanelMain pMain = new PanelMain();
 		PanelBottom pBot = new PanelBottom();
@@ -19,9 +24,5 @@ JFrame frame = new JFrame("Music Collection");
 		frame.setSize(750, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-	}
-
-	public static void main(String[] args) {
-		new Main();
 	}
 }
