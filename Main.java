@@ -2,16 +2,19 @@ import java.awt.*;
 import javax.swing.*;
 
 public class Main {
-
+JFrame frame = new JFrame("Music Collection");
 	public Main() {
-		JFrame frame = new JFrame("Music Collection");
-		PanelTop pt = new PanelTop();
-		PanelMain pm = new PanelMain();
-		PanelBottom pb = new PanelBottom();
+		
+		PanelTop pTop = new PanelTop();
+		PanelMain pMain = new PanelMain();
+		PanelBottom pBot = new PanelBottom();
 
-		frame.getContentPane().add(BorderLayout.NORTH, pt);
-		frame.getContentPane().add(BorderLayout.CENTER, pm);
-		frame.getContentPane().add(BorderLayout.SOUTH, pb);
+		MyMenuBar bar = new MyMenuBar();
+		frame.setJMenuBar(bar);
+
+		frame.getContentPane().add(BorderLayout.NORTH, pTop);
+		frame.getContentPane().add(BorderLayout.CENTER, pMain);
+		frame.getContentPane().add(BorderLayout.SOUTH, pBot);
 
 		frame.setSize(750, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
