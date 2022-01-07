@@ -7,6 +7,7 @@ import java.io.*;
 public class PanelMain extends JPanel {
 	ArrayList<Record> collection = new ArrayList<Record>();
 	JTextField artField, albField, lenField;
+	JLabel ranAl = new JLabel("");
 	File file = new File("collection.ser");
 
 	public PanelMain() {
@@ -17,6 +18,10 @@ public class PanelMain extends JPanel {
 		albField = new JTextField(20);
 		JLabel lenLabel = new JLabel("Length:");
 		lenField = new JTextField(10);
+
+		JPanel rando = new JPanel();
+		rando.setBackground(Color.GREEN);
+		rando.add(ranAl);
 		
 		add(artLabel);
 		add(artField);
@@ -24,21 +29,19 @@ public class PanelMain extends JPanel {
 		add(albField);
 		add(lenLabel);
 		add(lenField);
+		
 
+		JButton btn = new JButton("Random Album");
 		JButton save = new JButton("Save");
 		JButton load = new JButton("Load");
-		JButton update = new JButton("update collection");
-		JButton clear = new JButton("clear");
 
 		add(save);
 		add(load);
-		//add(update);
-		//add(clear);
-
-		//clear.addActionListener(new ClearListener());
+		add(btn);
+		add(rando);
+		btn.addActionListener(new RandomAlbumListener());
 		save.addActionListener(new SaveListener());
 		load.addActionListener(new LoadListener());
-		//update.addActionListener(new UpdateListener());
 	}
 
 	private void getAlbumCollection() {
@@ -102,15 +105,10 @@ public class PanelMain extends JPanel {
 		}
 	}
 
-/*	public class ClearListener implements ActionListener {
+	public class RandomAlbumListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
-			clearScreen();
+			int index = (int) (Math.random() * collection.size());
+			ranAl.setText((collection.get(index).getAlbumInfo()));
 		}
 	}
-
-	public class UpdateListener implements ActionListener {
-		public void actionPerformed(ActionEvent ev) {
-			saveAlbumCollection();
-		}
-	}*/
 }
