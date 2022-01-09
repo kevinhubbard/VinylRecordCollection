@@ -1,7 +1,6 @@
 public abstract class Album {
-	String albumName;
-	String albumArtist;
-	int length;
+	String albumName, albumArtist, length;
+	//boolean scratched;
 
 	public abstract String getAlbumInfo();
 }
