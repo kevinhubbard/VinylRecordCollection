@@ -1,10 +1,10 @@
 import java.io.*;
 
-public class Cd extends Album implements Serializable {
+public class Vinyl extends Album implements Serializable {
 	String albumName, albumArtist, genre;
 	boolean scratched = false;
 
-	public Cd(String n, String a, String g) {
+	public Vinyl(String n, String a, String g) {
 		albumName = n;
 		albumArtist = a;
 		genre = g;
