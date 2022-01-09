@@ -1,10 +1,7 @@
 import java.io.*;
 
 public class Record extends Album implements Serializable {
-
-	String albumName;
-	String albumArtist;
-	String length;
+	String albumName, albumArtist, length;
 
 	public Record(String n, String a, String l) {
 		albumName = n;
