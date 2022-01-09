@@ -6,6 +6,7 @@ public class MyMenuBar extends JMenuBar {
 
 	JMenuItem save, exit, help;
 	JMenu file, about;
+	Main ma = new Main();
 
 	public MyMenuBar() {
 		//JMenuBar menuBar = new JMenuBar();
@@ -36,6 +37,7 @@ public class MyMenuBar extends JMenuBar {
 	public class HelpListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
 			System.out.println("help here");
+			JOptionPane.showMessageDialog(ma.frame, "You suck ya jackass..");
 		}
 	}
 }

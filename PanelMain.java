@@ -18,10 +18,6 @@ public class PanelMain extends JPanel {
 		albField = new JTextField(20);
 		JLabel lenLabel = new JLabel("Length:");
 		lenField = new JTextField(10);
-
-		JPanel rando = new JPanel();
-		rando.setBackground(Color.GREEN);
-		rando.add(ranAl);
 		
 		add(artLabel);
 		add(artField);
@@ -38,7 +34,9 @@ public class PanelMain extends JPanel {
 		add(save);
 		add(load);
 		add(btn);
-		add(rando);
+		add(ranAl);
+
+		setLayout(new GridLayout(5,2));
 		btn.addActionListener(new RandomAlbumListener());
 		save.addActionListener(new SaveListener());
 		load.addActionListener(new LoadListener());
@@ -54,16 +52,8 @@ public class PanelMain extends JPanel {
 		} catch (FileNotFoundException e) {
 			System.out.println("File does not exist.");
 			//add file here if you can.
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
-			return;
-		} catch (ClassNotFoundException c) {
-			System.out.println("Class not found");
-			c.printStackTrace();
-			return;
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			return;
 		}
 
 		for (Record rec : collection) {
