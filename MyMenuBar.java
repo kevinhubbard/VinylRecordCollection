@@ -2,8 +2,6 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-import java.net.*;
-
 public class MyMenuBar extends JMenuBar {
 
 	JMenuItem save, exit, help;
