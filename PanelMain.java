@@ -82,9 +82,14 @@ public class PanelMain extends JPanel {
 
 	private boolean checkUserInput() {
 		boolean pass = false;
-		if (artField.getText().equals("") || albField.getText().equals("")) {
-			pass = false;
-		} else {pass = true;}
+		String alCheck = albField.getText().trim();
+		String arCheck = artField.getText().trim();
+
+		if (alCheck.length() == 0 || arCheck.length() == 0) {
+			System.out.println("There was a problem with the user input");
+		} else {
+			pass = true;
+		}
 		return pass;
 	} 
 
@@ -96,13 +101,13 @@ public class PanelMain extends JPanel {
 			if (check) {
 				if((radioBtnGroup.getSelection().getActionCommand()).equals("vinyl")) {
 					System.out.println("\nA new vinyl Album was created.");
-					Vinyl rec = new Vinyl(albField.getText(), artField.getText(), genreField.getText());
+					Vinyl rec = new Vinyl(albField.getText().trim(), artField.getText().trim(), genreField.getText());
 					collection.add(rec);
 					saveAlbumCollection();
 					clearScreen();
 				} else {
 					System.out.println("\nA new cd Album was created.");
-					Cd cd = new Cd(albField.getText(), artField.getText(), genreField.getText());
+					Cd cd = new Cd(albField.getText().trim(), artField.getText().trim(), genreField.getText());
 					collection.add(cd);
 					saveAlbumCollection();
 					clearScreen();
