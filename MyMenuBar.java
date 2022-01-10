@@ -2,10 +2,13 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
+import java.net.*;
+
 public class MyMenuBar extends JMenuBar {
 
 	JMenuItem save, exit, help;
 	JMenu file, about;
+
 
 	public MyMenuBar() {
 		//JMenuBar menuBar = new JMenuBar();
@@ -35,8 +38,10 @@ public class MyMenuBar extends JMenuBar {
 
 	public class HelpListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
-			System.out.println("help here");
-			JOptionPane.showMessageDialog(getParent(), "This program was made by Kevin Hubbard.\nAn album collection program written in Java,\nusing inheritance, polymorphism, and data structures.");
+			JOptionPane.showMessageDialog(getParent(), 
+				"This program was made by Kevin Hubbard\n"+ 
+				"An album collection program written in Java,\n"+
+				"using inheritance, polymorphism, and data structures.");
 		}
 	}
 }
