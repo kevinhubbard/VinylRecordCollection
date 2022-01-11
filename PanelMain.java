@@ -6,7 +6,9 @@ import java.io.*;
 
 public class PanelMain extends JPanel {
 	ArrayList<Album> collection = new ArrayList<Album>();
+	ArrayList<Album> topTen = new ArrayList<Album>();
 	JTextField artField, albField, genreField;
+	JCheckBox top;
 	JLabel ranAl = new JLabel("");
 	ButtonGroup radioBtnGroup = new ButtonGroup();
 	File file = new File("collection.ser");
@@ -25,6 +27,7 @@ public class PanelMain extends JPanel {
 		albField = new JTextField(20);
 		JLabel genreLabel = new JLabel("Genre:");
 		genreField = new JTextField(20);
+		top = new JCheckBox("Top 10?");
 
 		add(vinylBtn);
 		add(cdBtn);
@@ -34,6 +37,7 @@ public class PanelMain extends JPanel {
 		add(albField);
 		add(genreLabel);
 		add(genreField);
+		add(top);
 
 		JButton btn = new JButton("Random Album");
 		JButton save = new JButton("Save");
@@ -43,8 +47,9 @@ public class PanelMain extends JPanel {
 		add(load);
 		add(btn);
 		add(ranAl);
+		
 
-		setLayout(new GridLayout(6,2));
+		setLayout(new GridLayout(7,2));
 		btn.addActionListener(new RandomAlbumListener());
 		save.addActionListener(new SaveListener());
 		load.addActionListener(new LoadListener());
@@ -69,7 +74,7 @@ public class PanelMain extends JPanel {
 		try {
 			ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(file));
 			os.writeObject(collection);
-			System.out.println("Collection was serialized and has " + collection.size() + " albums.\n");
+			System.out.println("Collection was serialized and has " + collection.size() + " albums.");
 		} catch (IOException ex) {ex.printStackTrace();}
 	}
 
@@ -77,6 +82,7 @@ public class PanelMain extends JPanel {
 		artField.setText("");
 		albField.setText("");
 		genreField.setText("");
+		top.setSelected(false);
 		artField.requestFocus();
 	}
 
@@ -93,6 +99,17 @@ public class PanelMain extends JPanel {
 		return pass;
 	} 
 
+	private boolean topTenCheck() {
+		boolean pass = false;
+		if (top.isSelected()) {
+				System.out.println("Album was added to top Ten! Must have been good.\n");
+				pass = true;
+			} else {
+				System.out.println("This album was not part of your top ten bummer.\n");
+		}
+		return pass;
+	}
+
 	//INNER CLASSES
 
 	public class SaveListener implements ActionListener {
@@ -104,16 +121,27 @@ public class PanelMain extends JPanel {
 					Vinyl rec = new Vinyl(albField.getText().trim(), artField.getText().trim(), genreField.getText());
 					collection.add(rec);
 					saveAlbumCollection();
-					clearScreen();
+					if (topTenCheck()) {
+						topTen.add(rec);
+						System.out.println(rec.albumName + " was added to top 10 at spot ");
+					}
 				} else {
 					System.out.println("\nA new cd Album was created.");
 					Cd cd = new Cd(albField.getText().trim(), artField.getText().trim(), genreField.getText());
 					collection.add(cd);
 					saveAlbumCollection();
-					clearScreen();
+					if (topTenCheck()) {
+						topTen.add(cd);
+						System.out.println(cd.albumName + " was added to top 10 at spot ");
+					}
 				}
 			} else {
 				System.out.println("Something was entered wrong");
+			}
+			clearScreen();
+			System.out.println("Your Top Ten List:");
+			for (int i = 0; i<topTen.size(); i++) {
+				System.out.println(topTen.get(i));
 			}
 		}
 	}
