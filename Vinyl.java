@@ -2,21 +2,15 @@ import java.io.*;
 
 public class Vinyl extends Album implements Serializable {
 	String albumName, albumArtist, genre;
-	boolean scratched = false;
+	boolean scratched, topAlbum;
 	int topNumber;
 
-	public Vinyl(String n, String a, String g) {
+	public Vinyl(String n, String a, String g, boolean t) {
 		albumName = n;
 		albumArtist = a;
 		genre = g;
-		topNumber = null;
-	}
-
-	public Vinyl(String n, String a, String g, int p) {
-		albumName = n;
-		albumArtist = a;
-		genre = g;
-		topNumber = p;
+		scratched = false;
+		topAlbum = t;
 	}
 
 	public String getAlbumInfo() {

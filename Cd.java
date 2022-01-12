@@ -2,24 +2,16 @@ import java.io.*;
 
 public class Cd extends Album implements Serializable {
 	String albumName, albumArtist, genre;
-	boolean scratched = false;
+	boolean scratched, topAlbum;
 	int topNumber;
 
-	public Cd(String n, String a, String g) {
+	public Cd(String n, String a, String g, boolean t) {
 		albumName = n;
 		albumArtist = a;
 		genre = g;
-		topNumber = null;
+		scratched = false;
+		topAlbum = t;
 	}
-
-	public Cd(String n, String a, String g, int p,) {
-		albumName = n;
-		albumArtist = a;
-		genre = g;
-		topNumber = p;
-	}
-
-
 
 	public String getAlbumInfo() {
 		return this.getClass() + ": " + albumName + " by " + albumArtist;
