@@ -99,50 +99,45 @@ public class PanelMain extends JPanel {
 		return pass;
 	} 
 
-	private boolean topTenCheck() {
-		boolean pass = false;
-		if (top.isSelected()) {
+	private void topCheck(boolean a, Album b) {
+		if (a) {
 				System.out.println("Album was added to top Ten! Must have been good.\n");
-				pass = true;
+				topTen.add(b);
 			} else {
 				System.out.println("This album was not part of your top ten bummer.\n");
 		}
-		return pass;
 	}
 
 	//INNER CLASSES
 
 	public class SaveListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
-			boolean check = checkUserInput();
-			if (check) {
+
+			if (checkUserInput()) {
 				if((radioBtnGroup.getSelection().getActionCommand()).equals("vinyl")) {
 					System.out.println("\nA new vinyl Album was created.");
-					Vinyl rec = new Vinyl(albField.getText().trim(), artField.getText().trim(), genreField.getText());
+					Vinyl rec = new Vinyl(albField.getText().trim(), artField.getText().trim(), genreField.getText(), top.isSelected());
 					collection.add(rec);
 					saveAlbumCollection();
-					if (topTenCheck()) {
-						topTen.add(rec);
-						System.out.println(rec.albumName + " was added to top 10 at spot ");
-					}
+					topCheck(rec.topAlbum, rec);
 				} else {
 					System.out.println("\nA new cd Album was created.");
-					Cd cd = new Cd(albField.getText().trim(), artField.getText().trim(), genreField.getText());
+					Cd cd = new Cd(albField.getText().trim(), artField.getText().trim(), genreField.getText(), top.isSelected());
 					collection.add(cd);
 					saveAlbumCollection();
-					if (topTenCheck()) {
-						topTen.add(cd);
-						System.out.println(cd.albumName + " was added to top 10 at spot ");
-					}
+					topCheck(cd.topAlbum, cd);
 				}
 			} else {
 				System.out.println("Something was entered wrong");
 			}
+
+
+
+
+
+
 			clearScreen();
-			System.out.println("Your Top Ten List:");
-			for (int i = 0; i<topTen.size(); i++) {
-				System.out.println(topTen.get(i));
-			}
+			System.out.println("\nYour Top Ten List is " + topTen.size());
 		}
 	}
 
