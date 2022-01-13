@@ -65,9 +65,6 @@ public class PanelMain extends JPanel {
 			System.out.println("File does not exist.");
 		} catch (Exception ex) {ex.printStackTrace();}
 
-		for (Album r : collection) {
-			System.out.println(r.getAlbumInfo());
-		}
 	}
 
 	private void saveAlbumCollection() {
@@ -99,14 +96,6 @@ public class PanelMain extends JPanel {
 		return pass;
 	} 
 
-	private void topCheck(boolean a, Album b) {
-		if (a) {
-				System.out.println("Album was added to top Ten! Must have been good.\n");
-				topTen.add(b);
-			} else {
-				System.out.println("This album was not part of your top ten bummer.\n");
-		}
-	}
 
 	//INNER CLASSES
 
@@ -118,32 +107,33 @@ public class PanelMain extends JPanel {
 					System.out.println("\nA new vinyl Album was created.");
 					Vinyl rec = new Vinyl(albField.getText().trim(), artField.getText().trim(), genreField.getText(), top.isSelected());
 					collection.add(rec);
-					saveAlbumCollection();
-					topCheck(rec.topAlbum, rec);
 				} else {
 					System.out.println("\nA new cd Album was created.");
 					Cd cd = new Cd(albField.getText().trim(), artField.getText().trim(), genreField.getText(), top.isSelected());
 					collection.add(cd);
-					saveAlbumCollection();
-					topCheck(cd.topAlbum, cd);
 				}
+				saveAlbumCollection();
 			} else {
 				System.out.println("Something was entered wrong");
 			}
 
-
-
-
-
-
 			clearScreen();
-			System.out.println("\nYour Top Ten List is " + topTen.size());
 		}
 	}
 
 	public class LoadListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
 			getAlbumCollection();
+			for (Album r : collection) {
+				if (r.topAlbumCheck() == true) {
+					topTen.add(r);
+				} else {
+					System.out.println("idk");
+				}
+			}
+
+			System.out.println("Top 10 Size: " + topTen.size());
+			System.out.println("Collection size: " + collection.size());
 		}
 	}
 
