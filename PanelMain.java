@@ -28,7 +28,7 @@ public class PanelMain extends JPanel {
 		JLabel genreLabel = new JLabel("Genre:");
 		genreField = new JTextField(20);
 		top = new JCheckBox("Top 10?");
-
+		setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Record"));
 		add(vinylBtn);
 		add(cdBtn);
 		add(artLabel);
@@ -127,8 +127,6 @@ public class PanelMain extends JPanel {
 			for (Album r : collection) {
 				if (r.topAlbumCheck() == true) {
 					topTen.add(r);
-				} else {
-					System.out.println("idk");
 				}
 			}
 
