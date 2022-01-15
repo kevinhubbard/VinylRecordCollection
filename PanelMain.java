@@ -107,6 +107,11 @@ public class PanelMain extends JPanel {
 					System.out.println("\nA new vinyl Album was created.");
 					Vinyl rec = new Vinyl(albField.getText().trim(), artField.getText().trim(), genreField.getText(), top.isSelected());
 					collection.add(rec);
+					if (rec.topAlbumCheck()) {
+						String rank = JOptionPane.showInputDialog(getParent(), "Enter rank 1-10");
+						topTen.add(rec);
+						System.out.println("topTen size " + topTen.size());
+					}
 				} else {
 					System.out.println("\nA new cd Album was created.");
 					Cd cd = new Cd(albField.getText().trim(), artField.getText().trim(), genreField.getText(), top.isSelected());
@@ -116,7 +121,7 @@ public class PanelMain extends JPanel {
 			} else {
 				System.out.println("Something was entered wrong");
 			}
-
+			JOptionPane.showMessageDialog(getParent(), "Album was saved.");
 			clearScreen();
 		}
 	}
